@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">DemonApp</string>
+    <string name="app_home_welcome_btn">Welcome! meow</string>
+    <string name="debug_btn_string">DEBUG</string>
+    <string name="gps_la">纬度</string>
+    <string name="gps_lo">经度</string>
+    <string name="gps_addr">位置</string>
+    <string name="add_meno">Add</string>
+</resources>
