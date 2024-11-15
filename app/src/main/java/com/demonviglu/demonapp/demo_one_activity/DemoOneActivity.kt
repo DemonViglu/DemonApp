@@ -1,12 +1,17 @@
 package com.demonviglu.demonapp.demo_one_activity
 
 import android.app.Activity
+import android.app.ActivityManager
+import android.app.NotificationManager
+import android.content.Context
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
 import android.widget.Button
 import android.widget.LinearLayout
 import android.widget.Toast
+import androidx.core.app.NotificationCompat
+import androidx.core.app.NotificationManagerCompat
 import com.demonviglu.demonapp.R
 import com.demonviglu.demonapp.demo_gps_activity.GPSActivity
 import com.demonviglu.demonapp.demo_meno_activity.MenoActivity
@@ -57,7 +62,22 @@ class DemoOneActivity : Activity() {
         val gson = Gson()
         val data = NoteData()
 
+        if(NotificationManagerCompat.getEnabledListenerPackages(this).contains(packageName)){
+            Toast.makeText(this,"Yeah",Toast.LENGTH_SHORT).show()
+        }
+        else{
+            startActivityForResult(Intent("android.settings.ACTION_NOTIFICATION_LISTENER_SETTINGS"), 5238);
+        }
+
+
+        for(service in (getSystemService(Context.ACTIVITY_SERVICE) as ActivityManager).getRunningServices(Int.MAX_VALUE)){
+            if(service.service.className .contains("WechatNotificationService")){
+                Toast.makeText(this,"Yeah 2",Toast.LENGTH_SHORT).show()
+            }
+        }
+
         Toast.makeText(this,gson.toJson(data),Toast.LENGTH_SHORT).show()
+
     }
 
     private fun createActivityList(){
@@ -81,6 +101,11 @@ class DemoOneActivity : Activity() {
             "Jump to meno QAQ"
         ))
 
+        ly.addView(createActivityTeleport(
+            {startActivity(Intent("open_demo_wechat_activity_action"))},
+            "Wechat",
+            "Jump to wc Service QAQ"
+        ))
     }
 
     private fun createActivityTeleport(callback:()->Unit,st:String = "title",sc:String = "content",bts:String = "GO!"):ActivityTeleport{

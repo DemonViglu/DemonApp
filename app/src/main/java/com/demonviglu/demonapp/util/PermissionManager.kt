@@ -10,8 +10,7 @@ import android.provider.Settings
 import androidx.core.app.ActivityCompat
 
 
-class PermissionManager(iactivity: Activity, icontext: Context) {
-    private val activity = iactivity
+class PermissionManager(icontext: Context) {
     private val context = icontext
 
     public val PermissionRequestCode : Int = 0
@@ -19,9 +18,9 @@ class PermissionManager(iactivity: Activity, icontext: Context) {
     fun AutoAskForPermission(permission: String){
         if(!HasPermission(permission)){
 
-            if(ActivityCompat.shouldShowRequestPermissionRationale(activity,permission)){
+            if(ActivityCompat.shouldShowRequestPermissionRationale(context as Activity,permission)){
 
-                ActivityCompat.requestPermissions(activity,Array<String>(1){permission},PermissionRequestCode)
+                ActivityCompat.requestPermissions(context as Activity,Array<String>(1){permission},PermissionRequestCode)
 
             }
             else {
@@ -38,7 +37,7 @@ class PermissionManager(iactivity: Activity, icontext: Context) {
     }
 
     fun ShowPermissionSettingDialog(){
-        val builder: AlertDialog.Builder = AlertDialog.Builder(activity)
+        val builder: AlertDialog.Builder = AlertDialog.Builder(context)
         builder.setTitle("Ask for right")
         builder.setMessage("Why you refuse me T-T")
         builder.setPositiveButton("GO",
@@ -46,7 +45,7 @@ class PermissionManager(iactivity: Activity, icontext: Context) {
                 val intent: Intent = Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS)
                 val uri = Uri.fromParts("package", context.packageName, null)
                 intent.setData(uri)
-                activity.startActivity(intent)
+                context.startActivity(intent)
             })
         builder.setNegativeButton("QAQ", null)
         builder.show()

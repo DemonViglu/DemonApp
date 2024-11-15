@@ -25,6 +25,9 @@ class EditMenoFragment :Fragment() {
 
     private fun awake(){
         println("Try to open fragment")
+
+
+
     }
 
 }

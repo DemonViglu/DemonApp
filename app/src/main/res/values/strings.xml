@@ -6,4 +6,6 @@
     <string name="gps_lo">经度</string>
     <string name="gps_addr">位置</string>
     <string name="add_meno">Add</string>
+    <string name="open">Open</string>
+    <string name="close">Close</string>
 </resources>

@@ -17,6 +17,7 @@
             android:id="@+id/meno_listview"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:dividerPadding="10dp"
             android:orientation="vertical" />
     </ScrollView>
 
